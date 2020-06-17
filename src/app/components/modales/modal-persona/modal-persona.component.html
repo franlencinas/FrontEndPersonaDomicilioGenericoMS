@@ -1,0 +1,52 @@
+<div class="modal" id="modalPersona" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{editado ? 'Actualizar persona' : 'Agregar persona'}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="formGroup" [formGroup]="formGroup" (ngSubmit)="savePersonas(formGroup)">
+                    <input type="hidden" name="id" id="id" formControlName="id">
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+                        <div *ngIf ="formGroup.controls['nombre'].invalid && formGroup.controls['nombre'].touched"
+                             class="is-invalid">
+                            El nombre es obligatorio.
+                        </div>
+                    </div>    
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido">
+                            <div *ngIf ="formGroup.controls['apellido'].invalid && formGroup.controls['apellido'].touched"
+                                 class="is-invalid">
+                                El apellido es obligatorio.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dni">DNI</label>
+                        <input type="text" class="form-control" placeholder="DNI" formControlName="dni">
+                        <div *ngIf ="formGroup.controls['dni'].invalid && formGroup.controls['dni'].touched"
+                             class="is-invalid">
+                            El DNI es obligatorio.
+                            Solo se permiten números.
+                        </div>
+                    </div>  
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" #btnClose (click)="onClose()">Cerrar</button>
+                        <button type="submit " class="btn btn-primary " #btnClose>Guardar Persona</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

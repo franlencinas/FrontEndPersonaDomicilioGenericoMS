@@ -1,0 +1,43 @@
+<section style="margin: 1%">
+    <div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-10">
+                <h1>Gestión de Personas</h1>
+            </div>
+            <div class=" col-xs-12 col-sm-4 col-md-2">
+                <button type="button" class="btn btn-primary float-right ml-3 btn-block" data-toggle="modal" data-target="#modalPersona" (click)="resetPersona()">Agregar</button>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <table class="table table-sm table-dark">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">Domicilio</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let persona of personas | paginate: { itemsPerPage: 6, currentPage: paginaActual }">
+                            <th scope="row">{{persona.id}}</th>
+                            <td>{{persona.nombre}}</td>
+                            <td>{{persona.apellido}}</td>
+                            <td>{{persona.dni}}</td>
+                            <td><a [routerLink]="['domicilios/',persona.id_domicilio]">Ver domicilio/s</a></td>
+                            <td>
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalPersona" (click)="updatePersona(persona)">Actualizar</button>
+                                <button type="button" class="btn btn-danger" (click)="deletePersona(persona)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="paginaActual = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</section>
+<app-modal-persona [selectPersona]="selectPersona"></app-modal-persona>
